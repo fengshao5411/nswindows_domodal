@@ -1,0 +1,3 @@
+LIBRARY nsWindows
+EXPORTS
+	KillTimer=nsdKillTimer
