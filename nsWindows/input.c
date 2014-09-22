@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include <nsis/pluginapi.h> // nsis plugin
+#include "nsis/pluginapi.h" // nsis plugin
 
 #include "input.h"
 #include "defs.h"

@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include <nsis/pluginapi.h> // nsis plugin
+#include "nsis/pluginapi.h" // nsis plugin
 
 #include "defs.h"
 #include "input.h"
@@ -270,6 +270,7 @@ BOOL CALLBACK WindowProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
       {
         RemoveProp(g_window.controls[i].window, NSCONTROL_ID_PROP);
       }
+	  PostQuitMessage(0);
     break;
     }
   } 
@@ -895,6 +896,17 @@ void __declspec(dllexport) Show(HWND hwndParent, int string_size, char *variable
 //  ShowWindow(g_window.hwWindow, SW_SHOW);
 //  SetWindowLong(g_window.hwWindow, DWL_DLGPROC, (long) g_window.parentOriginalWndproc);
   ShowWindow(g_window.hwWindow, SW_SHOW);
+
+  if (g_window.hwWindow)
+  {
+	  MSG msg;
+	  
+	  while (GetMessage(&msg, NULL, 0, 0))
+	  {
+		  TranslateMessage(&msg);
+		  DispatchMessage(&msg);
+	  }
+  }
 }
 
 BOOL WINAPI DllMain(HANDLE hInst, ULONG ul_reason_for_call, LPVOID lpReserved)
